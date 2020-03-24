@@ -3,6 +3,12 @@ GOPL SOLUTIONS
 
 [The Go Programming Language](https://gopl.io/) Solutions
 
+Text
+---
+
+* [プログラミング言語Go - 丸善出版 理工・医学・人文社会科学の専門書出版社](https://www.maruzen-publishing.co.jp/item/b295039.html)
+* Eratta: [「プログラミング言語Go」正誤表](http://www001.upp.so-net.ne.jp/yshibata/myhomepage/errata/gpl_errata.html)
+
 Getting Started
 ---
 https://golang.org/doc/code.html

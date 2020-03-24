@@ -1,11 +1,5 @@
 main
 
-# Ignore example code from https://github.com/adonovan/gopl.io
-# And only commit solutions
-ch*/*
-!ch*/ex*/*.go
-!ch*/ex*.go
-
 # Created by https://www.gitignore.io/api/git,vim,go,osx,emacs,intellij
 # Edit at https://www.gitignore.io/?templates=git,vim,go,osx,emacs,intellij
 

@@ -1,8 +1,8 @@
-.PHONY: test install install-run setup
+.PHONY: install install-run setup test test_verbose
 
 export GO111MODULE := on
 
-all: test
+all: bench
 
 install:
 	go install
@@ -24,6 +24,9 @@ setup:
 
 test:
 	go test ./...
+
+bench:
+	go test -bench . -benchmem ./...
 
 test_verbose:
 	go test -v ./...
