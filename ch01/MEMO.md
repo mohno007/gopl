@@ -9,3 +9,4 @@
 	* for-each 相当
 * strings.Join (StringJoiner相当)
 * mapのvalue側の初期値はそのゼロ値
+* リファレンス(参照)
