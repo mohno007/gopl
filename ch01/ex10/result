@@ -1,0 +1,56 @@
+## Google News
+1.69s  2695405  http://news.google.com/topstories
+1.91s  2695400  http://news.google.com/topstories
+1.91s elapsed
+
+毎回生成されるデータは異なる模様。キャッシュしていない。
+
+## Hacker News
+1.26s    34483  http://news.ycombinator.com/
+2.40s    34483  http://news.ycombinator.com/
+2.40s elapsed
+
+diffで見てみたところ、同じ情報を返している。
+片方の応答が早いのは、キャッシュによるものなのか、片方が接続制限食らってるのか。
+
+## Reddit
+0.87s   288607  http://www.reddit.com/
+0.88s   288607  http://www.reddit.com/
+0.88s elapsed
+
+1.17s   288607  http://www.reddit.com/
+1.66s   288607  http://www.reddit.com/
+1.66s elapsed
+
+返すデータはそれぞれ異なる（セッションなどを保持するためのスクリプトが異なる）。
+
+## Qiita
+0.43s    49009  http://qiita.com/
+0.45s    49009  http://qiita.com/
+0.45s elapsed
+
+軽い(49KB)。データはCSRFトークンが異なる。
+
+## Yahoo JAPAN News
+0.85s   413667  http://news.yahoo.co.jp/
+0.90s   413667  http://news.yahoo.co.jp/
+0.90s elapsed
+
+413KB。データが異なる。
+
+## dev.to
+1.12s   398963  http://dev.to/
+1.12s   398963  http://dev.to/
+1.12s elapsed
+
+全く時間が変わらない。内容は全く同じ。
+
+0.44s   398859  http://dev.to/
+0.48s   398859  http://dev.to/
+0.48s elapsed
+
+0.25s   398859  http://dev.to/
+0.26s   398859  http://dev.to/
+0.26s elapsed
+
+何回か読み込むと時間に差が出た。
