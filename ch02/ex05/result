@@ -1,0 +1,4 @@
+BenchmarkPopCount-8                     1000000000               0.310 ns/op           0 B/op          0 allocs/op
+BenchmarkPopCountWithLoop-8             52334952                22.0 ns/op             0 B/op          0 allocs/op
+BenchmarkPopCountWithBitShift-8         18191013                60.9 ns/op             0 B/op          0 allocs/op
+BenchmarkPopCountWithBitAnd-8           95541590                10.9 ns/op             0 B/op          0 allocs/op
