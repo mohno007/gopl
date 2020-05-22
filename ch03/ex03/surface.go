@@ -33,7 +33,7 @@ func main() {
 			dx, dy, dz := corner(i+1, j+1)
 
 			for _, v := range []float64{ax, ay, bx, by, cx, cy, dx, dy} {
-				if math.IsInf(v, 0) {
+				if math.IsInf(v, 0) || math.IsNaN(v) {
 					break next
 				}
 			}
