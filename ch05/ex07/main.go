@@ -226,9 +226,8 @@ func forEachNode(n *html.Node, pre, post func(*html.Node)) {
 
 //!+
 func main() {
-	fi, _ := os.Stdin.Stat()
-
-	isPipe := (fi.Mode() & os.ModeCharDevice) == 0
+	fi, _ := os.Stdout.Stat()
+	isPipe = (fi.Mode() & os.ModeCharDevice) == 0
 
 	for _, url := range os.Args[1:] {
 		err := prettyPrint(url)
