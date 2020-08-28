@@ -4,9 +4,6 @@ export GO111MODULE := on
 
 all: bench
 
-run:
-	@cd $(dir $(TARGET)) && go run $(realpath $(TARGET))
-
 install:
 	go install
 

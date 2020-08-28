@@ -1,0 +1,25 @@
+#!/bin/sh
+# Usage: copy CHAPTER EXERCISE FILENAME|DIR_PATH
+
+is_start_with_chapter() {
+	echo "$1" | grep -q '^\(\./\)\{0,1\}ch[0-9]\{2\}'
+}
+
+raw_chapter="$1"
+chapter="`printf %02g "$1"`"
+exercise="`printf %02g "$2"`"
+filename="$3"
+
+dir="./ch${chapter}/ex${exercise}"
+
+mkdir -p "$dir"
+if [ -d "$filename" ]; then
+	source_dir="$filename"
+else
+	source_dir="${GOPATH:-"~/go/"}"/src/gopl.io/ch${raw_chapter}/${filename}
+	if ! [ -d "$source_dir" ]; then
+		echo "'$filename' is not found in gopl.io"
+		exit 1
+	fi
+fi
+cp -n "$source_dir"/* "$dir/"
