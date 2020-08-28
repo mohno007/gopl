@@ -67,6 +67,7 @@ var emptyElements = map[string]bool{
 }
 
 var depth int = 0
+var isPipe bool
 
 func isEmptyElements(n *html.Node) bool {
 	if n.Type != html.ElementNode {
@@ -80,6 +81,10 @@ func isEmptyElements(n *html.Node) bool {
 }
 
 func decolate(formats ...string) string {
+	if isPipe {
+		return ""
+	}
+
 	if len(formats) == 0 {
 		return "\033[0m"
 	}
@@ -221,6 +226,10 @@ func forEachNode(n *html.Node, pre, post func(*html.Node)) {
 
 //!+
 func main() {
+	fi, _ := os.Stdin.Stat()
+
+	isPipe := (fi.Mode() & os.ModeCharDevice) == 0
+
 	for _, url := range os.Args[1:] {
 		err := prettyPrint(url)
 		if err != nil {
