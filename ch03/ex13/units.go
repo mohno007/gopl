@@ -1,4 +1,4 @@
-package main
+package unit
 
 // https://ja.wikipedia.org/wiki/SI%E6%8E%A5%E9%A0%AD%E8%BE%9E
 const (

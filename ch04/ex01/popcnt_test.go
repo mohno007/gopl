@@ -1,4 +1,4 @@
-package main
+package popcnt
 
 import (
 	"crypto/sha256"

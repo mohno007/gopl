@@ -1,4 +1,4 @@
-package main
+package popcnt
 
 var pc [256]uint8
 
