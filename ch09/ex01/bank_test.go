@@ -64,7 +64,41 @@ func TestBankWithdraw(t *testing.T) {
 	}
 }
 
-func TestBankWithdrawFail(t *testing.T) {
+func TestBankWithdrawZero(t *testing.T) {
+	account := bank.New()
+
+	// Alice
+	account.Deposit(200)
+	fmt.Println("=", account.Balance())
+
+	// Bob
+	if got, want := account.Withdraw(0), false; got != want {
+		t.Errorf("Balance = %v, want %v", got, want)
+	}
+
+	if got, want := account.Balance(), 200; got != want {
+		t.Errorf("Balance = %d, want %d", got, want)
+	}
+}
+
+func TestBankWithdrawMinus(t *testing.T) {
+	account := bank.New()
+
+	// Alice
+	account.Deposit(200)
+	fmt.Println("=", account.Balance())
+
+	// Bob
+	if got, want := account.Withdraw(-100), false; got != want {
+		t.Errorf("Balance = %v, want %v", got, want)
+	}
+
+	if got, want := account.Balance(), 200; got != want {
+		t.Errorf("Balance = %d, want %d", got, want)
+	}
+}
+
+func TestBankWithdrawOver(t *testing.T) {
 	account := bank.New()
 
 	// Alice

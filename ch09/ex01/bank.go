@@ -10,10 +10,10 @@ package bank
 type Bank struct {
 	deposits chan int
 	balances chan int
-	withdraw chan WithdrawRequest
+	withdraw chan withDrawRequest
 }
 
-type WithdrawRequest struct {
+type withDrawRequest struct {
 	amount int
 	result chan<- bool
 }
@@ -22,7 +22,7 @@ func New() *Bank {
 	b := Bank{
 		deposits: make(chan int), // send amount to deposit
 		balances: make(chan int), // receive balance
-		withdraw: make(chan WithdrawRequest),
+		withdraw: make(chan withDrawRequest),
 	}
 	go b.teller() // start the monitor goroutine
 
@@ -38,7 +38,7 @@ func (b *Bank) Balance() int { return <-b.balances }
 /// Withdraw は、口座から引き出します
 func (b *Bank) Withdraw(amount int) bool {
 	result := make(chan bool)
-	b.withdraw <- WithdrawRequest{
+	b.withdraw <- withDrawRequest{
 		amount: amount,
 		result: result,
 	}
@@ -53,7 +53,7 @@ func (b *Bank) teller() {
 			balance += amount
 		case b.balances <- balance:
 		case req := <-b.withdraw:
-			if req.amount > 0 && req.amount > balance {
+			if req.amount <= 0 || req.amount > balance {
 				req.result <- false
 				continue
 			}
