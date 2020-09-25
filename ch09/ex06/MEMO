@@ -1,0 +1,14 @@
+Darwin Kernel Version 18.7.0: Thu Jun 18 20:50:10 PDT 2020; root:xnu-4903.278.43~1/RELEASE_X86_64
+
+Intel(R) Core(TM) i7-4770HQ CPU @ 2.20GHz
+
+i7-4770HQ has 4 physical cores, 8 logical cores
+
+GOMAXPROCS=1 ./run ch08/ex05/main.go > /dev/null  7.50s user 0.59s system 96% cpu 8.353 total
+GOMAXPROCS=2 ./run ch08/ex05/main.go > /dev/null  10.30s user 0.94s system 162% cpu 6.929 total
+GOMAXPROCS=3 ./run ch08/ex05/main.go > /dev/null  13.48s user 2.39s system 214% cpu 7.382 total
+GOMAXPROCS=4 ./run ch08/ex05/main.go > /dev/null  18.14s user 5.04s system 251% cpu 9.220 total
+GOMAXPROCS=5 ./run ch08/ex05/main.go > /dev/null  18.41s user 5.59s system 258% cpu 9.280 total
+GOMAXPROCS=6 ./run ch08/ex05/main.go > /dev/null  20.72s user 7.18s system 279% cpu 9.966 total
+GOMAXPROCS=7 ./run ch08/ex05/main.go > /dev/null  20.87s user 7.15s system 283% cpu 9.871 total
+GOMAXPROCS=8 ./run ch08/ex05/main.go > /dev/null  21.76s user 6.94s system 254% cpu 11.266 total

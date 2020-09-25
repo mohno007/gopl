@@ -1,0 +1,25 @@
+#!/bin/sh
+
+while getopts "o:" option; do
+	case "${option}" in
+	o)
+		opts="$OPTARG"
+		;;
+	\?)
+		exit 1
+		;;
+	esac
+done
+
+shift $(($OPTIND - 1))
+
+dir="`dirname "$1"`"
+
+cd "$dir"
+shift
+
+if [ -p /dev/stdin ]; then
+	go test $opts . "$@" < /dev/stdin
+else
+	go test $opts . "$@"
+fi

@@ -16,17 +16,23 @@ import (
 	"sync"
 )
 
+type plot struct {
+	px    int
+	py    int
+	color color.Color
+}
+
 func main() {
 	const (
 		xmin, ymin, xmax, ymax = -2, -2, +2, +2
-		width, height          = 2048, 2048
+		width, height          = 4096, 4096
 	)
-
-	img := image.NewRGBA(image.Rect(0, 0, width, height))
 
 	var wg sync.WaitGroup
 
-	cpuCount := runtime.NumCPU() * 128
+	plots := make(chan plot, 1024)
+	done := make(chan struct{})
+	cpuCount := runtime.NumCPU()
 	for cpu := 0; cpu < cpuCount; cpu++ {
 		pyStart := (height / cpuCount) * cpu
 		pyEnd := (height / cpuCount) * (cpu + 1)
@@ -62,12 +68,24 @@ func main() {
 					x := float64(px)/width*(xmax-xmin) + xmin
 					z := complex(x, y)
 					// Image point (px, py) represents complex value z.
-					img.Set(px, py, mandelbrot(z))
+					plots <- plot{px, py, mandelbrot(z)}
 				}
 			}
 		}(pyStart, pyEnd)
 	}
+
+	img := image.NewRGBA(image.Rect(0, 0, width, height))
+	go func() {
+		// channel with buffer can receive all messages after close
+		for p := range plots {
+			img.Set(p.px, p.py, p.color)
+		}
+		close(done)
+	}()
+
 	wg.Wait()
+	close(plots) // all goroutines ends means all goroutines sent message to plots
+	<-done
 	png.Encode(os.Stdout, img) // NOTE: ignoring errors
 }
 
