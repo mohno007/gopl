@@ -1,36 +1,39 @@
 package pingpong
 
 func makePingpong(done chan struct{}) (start func(), result <-chan uint) {
-	ch1 := make(chan uint)
-	ch2 := make(chan uint)
+	ch1 := make(chan struct{})
+	ch2 := make(chan struct{})
 	res := make(chan uint)
+	count := uint(0)
 
 	go func() {
-		var v uint
 	loop:
 		for {
 			select {
-			case v = <-ch1:
-				ch2 <- v + 1
+			case <-ch1:
+				count++
+				ch2 <- struct{}{}
 			case <-done:
 				break loop
 			}
 		}
-		res <- v
+		close(ch2)
+		res <- count
 	}()
 	go func() {
-		var v uint
-	loop2:
+	loop:
 		for {
 			select {
-			case v = <-ch2:
-				ch1 <- v + 1
+			case <-ch2:
+				count++
+				ch1 <- struct{}{}
 			case <-done:
-				break loop2
+				break loop
 			}
 		}
-		res <- v
+		close(ch1)
+		res <- count
 	}()
 
-	return func() { ch1 <- 0 }, res
+	return func() { ch1 <- struct{}{} }, res
 }

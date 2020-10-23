@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# [How do you print in a Go test using the "testing" package? - Stack Overflow https://stackoverflow.com/questions/23205419/how-do-you-print-in-a-go-test-using-the-testing-package]
+#
+# The structs testing.T and testing.B both have a .Log and .Logf method
+# The -v flag shows logs.
+
 while getopts "o:" option; do
 	case "${option}" in
 	o)
