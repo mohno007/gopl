@@ -82,6 +82,7 @@ func TestComplex(t *testing.T) {
 		f    bool
 		c64  complex64
 		c128 complex128
+		i    interface{}
 	}
 	s := Movie{
 		math.MaxFloat32,
@@ -90,6 +91,7 @@ func TestComplex(t *testing.T) {
 		false,
 		complex(math.MaxFloat32, math.MaxFloat32),
 		complex(math.MaxFloat64, math.MaxFloat64),
+		[]int{1, 2, 3},
 	}
 
 	// Encode it

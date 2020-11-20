@@ -107,9 +107,9 @@ func encode(buf *bytes.Buffer, v reflect.Value) error {
 
 	case reflect.Interface:
 		buf.WriteString("(\"")
-		buf.WriteString(v.Type().Name())
+		buf.WriteString(v.Elem().Type().String())
 		buf.WriteString("\" ")
-		encode(buf, v)
+		encode(buf, v.Elem())
 		buf.WriteByte(')')
 
 	default: // chan, func, interface
