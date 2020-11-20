@@ -9,7 +9,6 @@ import (
 	"os"
 	"reflect"
 	"sync"
-	"testing"
 
 	"gopl.io/ch7/eval"
 )
@@ -114,17 +113,21 @@ func Example_struct_map() {
 
 func Example_array_map() {
 	Display("m", map[[2]int]int{
-		[2]int{0, 0}: 0,
-		[2]int{0, 1}: 1,
-		[2]int{1, 0}: 1,
-		[2]int{1, 1}: 1,
+		{0, 0}: 0,
+		{0, 1}: 1,
+		{1, 0}: 1,
+		{1, 1}: 1,
 	})
-	// Output:
-	// Display m (map[[2]int]int):
-	// m[[2]int{ 0, 0, }] = 0
-	// m[[2]int{ 0, 1, }] = 1
-	// m[[2]int{ 1, 0, }] = 1
-	// m[[2]int{ 1, 1, }] = 1
+	// We don't use an Output: comment since displaying
+	// a map is nondeterministic.
+	/*
+		//!+output
+		// Display m (map[[2]int]int):
+		// m[[2]int{ 0, 0, }] = 0
+		// m[[2]int{ 0, 1, }] = 1
+		// m[[2]int{ 1, 0, }] = 1
+		// m[[2]int{ 1, 1, }] = 1
+	*/
 }
 
 func Example_movie() {
@@ -188,7 +191,7 @@ func Example_movie() {
 }
 
 // This test ensures that the program terminates without crashing.
-func Test(t *testing.T) {
+func Example_x() {
 	// Some other values (YMMV)
 	Display("os.Stderr", os.Stderr)
 	// Output:
@@ -248,7 +251,7 @@ func Test(t *testing.T) {
 	type P *P
 	var p P
 	p = &p
-	if false {
+	if true {
 		Display("p", p)
 		// Output:
 		// Display p (display.P):
@@ -259,7 +262,7 @@ func Test(t *testing.T) {
 	type M map[string]M
 	m := make(M)
 	m[""] = m
-	if false {
+	if true {
 		Display("m", m)
 		// Output:
 		// Display m (display.M):
@@ -270,7 +273,7 @@ func Test(t *testing.T) {
 	type S []S
 	s := make(S, 1)
 	s[0] = s
-	if false {
+	if true {
 		Display("s", s)
 		// Output:
 		// Display s (display.S):
@@ -284,7 +287,7 @@ func Test(t *testing.T) {
 	}
 	var c Cycle
 	c = Cycle{42, &c}
-	if false {
+	if true {
 		Display("c", c)
 		// Output:
 		// Display c (display.Cycle):
